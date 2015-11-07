@@ -1,0 +1,37 @@
+/*	Linkester.js
+	By Zain Ali
+	jsfiler.altervista.org/linkester.html
+*/
+div#linkester-js-element {
+  position: absolute;
+  background: #000;
+  visibility: hidden;
+  color: #FFF;
+  transition: all 0.1s ease;
+  opacity: 0;
+  padding: 4px;
+  border-radius: 3px;
+  transform: scale(0.9,0.9);
+}
+#linkester-js-element div {
+	display:inline-block;
+}
+
+a:hover + #linkester-js-element{visibility:visible;transform: scale(1,1);opacity:1;}
+
+
+/* protocol-secure */
+
+div#protocol-secure {
+color: rgb(70, 201, 70);
+}
+
+/* mailto */
+span#protocol-mailto {
+  color: rgb(255, 99, 71);
+}
+/* ftp */
+span#protocol-ftp {
+  color: rgb(244, 42, 77);
+}
+
