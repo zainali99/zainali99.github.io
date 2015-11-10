@@ -9,7 +9,9 @@
     <script>
       window.onload = function(){
         linkester.applyTo(".md_main");
-         window.location.reload(true)
+        document.querySelector("#md_run").onclick = function(){
+           window.location.reload(true);
+        }
       }
       
     </script>
@@ -36,10 +38,10 @@
         <p>the files to load linkester are already included in the debugger.</p>
         <div class="mini_debugger" id="linkester">
         <div class="md_header"><input type="text" id="md_cmd" value="linkester.js" readonly/>
-        <!--
-        The Run button is not available for now
-        <input type="button" id="md_run" value="Run" />
-        -->
+        
+        
+        <input type="button" id="md_run" value="Reload" />
+       
         </div>
           <div class="md_main">
             <h1>Hello World</h1>
