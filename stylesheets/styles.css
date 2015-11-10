@@ -68,7 +68,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p, ul, ol, table, pre, dl {
-  margin:0 0 20px;
+  margin:0 0 5px;
 }
 
 h1, h2, h3 {
@@ -229,6 +229,33 @@ section {
   padding-bottom:50px;
 }
 
+.mini_debugger {
+  width: 500px;
+  border: 1px solid #CCC;
+  min-height: 100px;
+  max-width: 90%;
+}
+.md_header {
+  border-bottom:1px solid #AAA;
+  min-height: 40px;
+  line-height: 40px;
+}
+#md_cmd {
+  height: 20px;
+  margin: 0 20px 0 20px;
+  border:0;
+  border-bottom:1px solid #CCC;
+  padding:2px;color:#333;
+  box-shadow:0 1px 0px 2px #DDD;
+  transition:all 0.1s ease-out;
+  width: 80%;
+}
+#md_cmd:focus{outline:none;border-color:#39c;box-shadow: 0 1px 0px 2px #39c}
+#md_run {line-height: 25px;height: 25px;color:#FFF;background-color:#39c;border:1px solid #39c;text-shadow:0 -1px 0 rgba(0,0,0,0.3);font-weight: bold;cursor:pointer; outline:none}
+
+
+.md_main {padding: 10px}
+
 small {
   font-size:11px;
 }
@@ -246,6 +273,16 @@ footer {
   position:fixed;
   bottom:50px;
   -webkit-font-smoothing:subpixel-antialiased;
+}
+
+#lastv {background-color:tomato;color:#FFF;font-weight:bold;padding:2px 4px;border-radius:3px;}
+.md_footer {
+   
+    font-size:11px;
+    text-align:center;
+    border-top:1px solid #CCC;
+    background-color:#EEE;
+
 }
 
 @media print, screen and (max-width: 960px) {
