@@ -42,7 +42,7 @@ bool=false;
         else if(bool == true) {
         	//request data: title;
         	var xhr = new XMLHttpRequest();
-			xhr.open("GET", o.href, true);
+			xhr.open("GET", sendTo, true);
 			xhr.onreadystatechange = function() { 
   			if (xhr.readyState == 4) {
   				//get title of the page requested.
@@ -76,7 +76,7 @@ bool=false;
 		//the hostname is equal to our domain.
 		if(o.hostname == d) {
 			bool = true;
-
+			sendTo = obj[i];
 		}
 		else {
 			bool = false;
