@@ -76,7 +76,7 @@ bool=false;
 		//the hostname is equal to our domain.
 		if(o.hostname == d) {
 			bool = true;
-			sendTo = obj[i];
+			sendTo = obj[i].href;
 		}
 		else {
 			bool = false;
