@@ -78,6 +78,9 @@ bool=false;
 			bool = true;
 
 		}
+		else {
+			bool = false;
+		}
 
 		getText();
 
