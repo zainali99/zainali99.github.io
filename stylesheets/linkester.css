@@ -16,7 +16,9 @@ div#linkester-js-element {
 #linkester-js-element div {
 	display:inline-block;
 }
-
+div#linkester-js-page-title {
+    display: block;
+}
 a:hover + #linkester-js-element{visibility:visible;transform: scale(1,1);opacity:1;}
 
 
