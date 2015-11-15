@@ -1,7 +1,7 @@
 // Linkester.js 0.2 (C) 2015 by Zain Ali, http://zainali99.github.io
-//#NOTE:the 03 is created for only test.
+
 var linkester = (function() {
-var txt,cacheToken, element, o, d;
+var txt,cacheToken, element, o, title;
 bool=false;
 
 
@@ -30,32 +30,22 @@ bool=false;
     
     
 		if(o.protocol =="https:"){
-			txt = linkStart + psStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
+			txt = linkStart + titleStart + title + closeDiv + psStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
 		}
         else if(o.protocol =="mailto:"){
-        	txt = linkStart + pmStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
+        	txt = linkStart + titleStart + title + closeDiv + pmStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
         }
         else if(o.protocol =="ftp:"){
-        	txt = linkStart + ftpStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
+        	txt = linkStart + titleStart + title + closeDiv + ftpStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
         }
         
-        else if(bool == true) {
-        	//request data: title;
-        	var xhr = new XMLHttpRequest();
-			xhr.open("GET", sendTo, true);
-			xhr.onreadystatechange = function() { 
-  			if (xhr.readyState == 4) {
-  				//get title of the page requested.
-    			var title = (/<title>(.*?)<\/title>/m).exec(xhr.responseText)[1];
-    			txt = linkStart + titleStart + title + closeDiv + pStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
-  			}
-			}
-			xhr.send();
-        			}
+        	
+        			
+        
         
 
 		else {
-			txt = linkStart + pStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
+			txt = linkStart + titleStart + title + closeDiv + pStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
 		}
 	}
   
@@ -72,17 +62,18 @@ bool=false;
 		obj[i].token = "token:"+i+"_href:"+obj[i];
 		cacheToken= obj[i].token;
 		o = obj[i];
-		d = document.domain;
-		//the hostname is equal to our domain.
-		if(o.hostname == d) {
-			bool = true;
-			sendTo = obj[i].href;
-		}
-		else {
-			bool = false;
-		}
-
-		getText();
+		//send request for title 
+		var xhr = new XMLHttpRequest();
+			xhr.open("GET", obj[i], true);
+			xhr.onreadystatechange = function() { 
+  			if (xhr.readyState == 4) {
+  				//get title of the page requested.
+    			 title = (/<title>(.*?)<\/title>/m).exec(xhr.responseText)[1];
+    			
+  			}
+			}
+			xhr.send();
+			getText();
 
 o.insertAdjacentHTML ("afterEnd", txt);
 //log
@@ -106,5 +97,3 @@ o.insertAdjacentHTML ("afterEnd", txt);
   
 })();
 	
-
-
