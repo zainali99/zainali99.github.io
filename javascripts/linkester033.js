@@ -1,10 +1,9 @@
 // Linkester.js 0.2 (C) 2015 by Zain Ali, http://zainali99.github.io
 
 var linkester = (function() {
-var txt,cacheToken, element, o, title;
-bool=false;
-
-
+var txt, 
+		  cacheToken, element,
+		  o;
 	
 
 	function  getHttps() {
@@ -17,35 +16,30 @@ bool=false;
 
 	function getText() {
     var linkStart = "<div id='linkester-js-element'>";
-    var titleStart = "<div id='linkester-js-page-title'>";
     var pStart = "<span id='protocol'>"+o.protocol;
     var psStart = "<span id='protocol-secure'>"+o.protocol;
     var hnStart = "<span id='hostname'>//"+o.hostname;
     var pnStart = "<span id='pathname'>"+o.pathname;
     var pmStart = "<span id='protocol-mailto'>"+o.protocol;
     var ftpStart = "<span id='protocol-ftp'>"+o.protocol;
-    
     var closeDiv = "</div>";
     var closeSpan = "</span>";
     
     
 		if(o.protocol =="https:"){
-			txt = linkStart + titleStart + title + closeDiv + psStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
+			txt = linkStart + psStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
 		}
         else if(o.protocol =="mailto:"){
-        	txt = linkStart + titleStart + title + closeDiv + pmStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
+        	txt = linkStart + pmStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
         }
         else if(o.protocol =="ftp:"){
-        	txt = linkStart + titleStart + title + closeDiv + ftpStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
+        	txt = linkStart + ftpStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
         }
-        
-        	
-        			
         
         
 
 		else {
-			txt = linkStart + titleStart + title + closeDiv + pStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
+			txt = linkStart + pStart + closeSpan + hnStart + closeSpan + pnStart + closeSpan + closeDiv;
 		}
 	}
   
@@ -58,22 +52,11 @@ bool=false;
       var obj = where.querySelectorAll("a");
         
 	for(var i=0; i < obj.length; i++){
-		//Are this Important ?!?!
 		obj[i].token = "token:"+i+"_href:"+obj[i];
 		cacheToken= obj[i].token;
 		o = obj[i];
-		//send request for title 
-		var xhr = new XMLHttpRequest();
-			xhr.open("GET", obj[i], true);
-			xhr.onreadystatechange = function() { 
-  			if (xhr.readyState == 4) {
-  				//get title of the page requested.
-    			 title = (/<title>(.*?)<\/title>/m).exec(xhr.responseText)[1];
-    			
-  			}
-			}
-			xhr.send();
-			getText();
+		element = document.createElement("span");
+		getText();
 
 o.insertAdjacentHTML ("afterEnd", txt);
 //log
@@ -92,8 +75,20 @@ o.insertAdjacentHTML ("afterEnd", txt);
 		  }
     }
     
-  }
+  },
+  
+  getTitle: function(page) {
+  	var xhr = new XMLHttpRequest();
+	xhr.open("GET", page, true);
+	xhr.onreadystatechange = function() { 
+  	if (xhr.readyState == 4) {
+    	var title = (/<title>(.*?)<\/title>/m).exec(xhr.responseText)[1];
+  	}
+	
+	}
+	xhr.send();
+	return title;
+	 }
     
   
 })();
-	
